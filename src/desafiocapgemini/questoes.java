@@ -3,6 +3,8 @@ package desafiocapgemini;
 import java.io.IOException;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class questoes {
 	
 	public static void questao1(int valor) {
@@ -100,53 +102,55 @@ public class questoes {
 
 	public static void main(String[] args) throws IOException {
 		
-		int opcao = 0, paramInt = 0;
-		String paramString = "";
-		Scanner scan = new Scanner(System.in);
+		String opcao = "";
+		String param = "";
 		
-		do {
-			System.out.println("");
-			System.out.println("\n                =========================");
-			System.out.println("                |     1 - Questão 1     |");
-			System.out.println("                |     2 - Questão 2     |");
-			System.out.println("                |     3 - Questão 3     |");
-			System.out.println("                |     0 - Sair          |");
-			System.out.println("                =========================\n");
-
-			System.out.println("\nSelecione uma opção.");
-			opcao = scan.nextInt();
-			System.out.print("");
-			
-			scan = new Scanner(System.in);
-			switch (opcao) {
-			case 1:
-				System.out.println("Informe o valor.");
-				paramInt = scan.nextInt();
-				questao1(paramInt);
-				break;
-			case 2:
-				System.out.println("Informe a senha.");
-				paramString = scan.nextLine();
-				questao2(paramString);
-				break;
-			case 3:
-				System.out.println("Informe a palavra.");
-				paramString = scan.nextLine();
-				System.out.println("Anagramas encontrados: "+ questao3(paramString));
-				break;
-			case 0:
-				scan.close();
-				break;
-			default:
-				System.out.println("Opção inválida!");
-				break;
-			}
-			if(opcao != 0) {
-				System.out.println("Pressione enter para continuar.");
-				System.in.read();
+		try {
+			Scanner scan = new Scanner(System.in);
+			do {
+				System.out.println("");
+				System.out.println("\n                =========================");
+				System.out.println("                |     1 - Questão 1     |");
+				System.out.println("                |     2 - Questão 2     |");
+				System.out.println("                |     3 - Questão 3     |");
+				System.out.println("                |     0 - Sair          |");
+				System.out.println("                =========================\n");
+				
+				System.out.println("\nSelecione uma opção.");
+				opcao = scan.nextLine();
+				System.out.print("");
+				
+				switch (opcao) {
+				case "1":
+					System.out.println("Informe o valor.");
+					param = scan.nextLine();
+					questao1(Integer.parseInt(param));
+					break;
+				case "2":
+					System.out.println("Informe a senha.");
+					param = scan.nextLine();
+					questao2(param);
+					break;
+				case "3":
+					System.out.println("Informe a palavra.");
+					param = scan.nextLine();
+					System.out.println("Anagramas encontrados: "+ questao3(param));
+					break;
+				case "0":
+					scan.close();
+					break;
+				}
+				if(Integer.parseInt(opcao) > 0 && Integer.parseInt(opcao) < 4) {
+					System.out.println("\nPressione enter para continuar.");
+					scan.nextLine();
+				}
 				scan = new Scanner(System.in);
-			}
-		} while (opcao != 0);
+			} while (Integer.parseInt(opcao) != 0);
+			
+			scan.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
